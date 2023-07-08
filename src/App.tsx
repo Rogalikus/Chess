@@ -27,6 +27,7 @@ function App() {
     const newBoard = new Board()
     newBoard.initCells()
     newBoard.addFigures()
+    setCurrentPlayer(whitePlayer)
     setBoard(newBoard)
   }
 
