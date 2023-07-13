@@ -3,6 +3,10 @@ import { Cell } from "../Cell";
 import { Colors } from "../Colors";
 import blackLogo from "../../chess-Icons/Chess_pdt60.png";
 import whiteLogo from "../../chess-Icons/Chess_plt60.png";
+import { Queen } from "./Queen";
+import { Bishop } from "./Bishop";
+import { Knight } from "./Knight";
+import { Rook } from "./Rook";
 
 export class Pawn extends Figure {
   isFirstStep: boolean = true;
@@ -46,5 +50,31 @@ export class Pawn extends Figure {
   moveFigure(target: Cell): void {
     super.moveFigure(target);
     this.isFirstStep = false;
+    if (
+      (this.color === Colors.BLACK && target.y === 7) ||
+      (this.color === Colors.WHITE && target.y === 0)
+    ) {
+      const promotionFigure = prompt(
+        "Select a promotion figure: Queen, Bishop, Knight, Rook"
+      );
+
+      switch (promotionFigure?.toLowerCase()) {
+        case "queen" || "Queen":
+          this.cell.figure = new Queen(this.color, target);
+          break;
+        case "bishop" || "Bishop":
+          this.cell.figure = new Bishop(this.color, target);
+          break;
+        case "knight" || "Knight":
+          this.cell.figure = new Knight(this.color, target);
+          break;
+        case "rook" || "Knight":
+          this.cell.figure = new Rook(this.color, target);
+          break;
+        default:
+          this.cell.figure = new Queen(this.color, target);
+          break;
+      }
+    }
   }
 }
